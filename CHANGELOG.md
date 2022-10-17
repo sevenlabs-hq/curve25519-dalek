@@ -5,6 +5,11 @@ major series.
 
 ## 3.x series
 
+### 3.2.1-unpin-zeroize
+
+* Relax the `zeroize` dependency to `^1`
+* Update the MSRV from 1.41 to 1.56.1
+
 ### 3.2.0
 
 * Add support for getting the identity element for the Montgomery
