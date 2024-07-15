@@ -53,7 +53,7 @@ enum BackendKind {
 
 #[inline]
 fn get_selected_backend() -> BackendKind {
-    #[cfg(all(curve25519_dalek_backend = "simd", nightly))]
+    #[cfg(all(curve25519_dalek_backend = "simd", nightly, not(target_os = "solana")))]
     {
         cpufeatures::new!(cpuid_avx512, "avx512ifma", "avx512vl");
         let token_avx512: cpuid_avx512::InitToken = cpuid_avx512::init();
@@ -62,7 +62,7 @@ fn get_selected_backend() -> BackendKind {
         }
     }
 
-    #[cfg(curve25519_dalek_backend = "simd")]
+    #[cfg(all(curve25519_dalek_backend = "simd", not(target_os = "solana")))]
     {
         cpufeatures::new!(cpuid_avx2, "avx2");
         let token_avx2: cpuid_avx2::InitToken = cpuid_avx2::init();
